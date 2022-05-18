@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "882441417528",
+    "project_id": "photo-scrapbook",
+    "storage_bucket": "photo-scrapbook.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882441417528:android:79532eb7614d19a2d207cd",
+        "android_client_info": {
+          "package_name": "com.ymtstudio.photo_scrapbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882441417528-2u24kk5pr5u6omqdvudu9shc2gi5bule.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwkLlcsgKrozN4WtKehKAJcYk1gf5E0WM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "882441417528-2u24kk5pr5u6omqdvudu9shc2gi5bule.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
