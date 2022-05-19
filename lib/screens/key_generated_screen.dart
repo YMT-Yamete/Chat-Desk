@@ -1,35 +1,28 @@
+import 'package:chat_desk/screens/start_screen.dart';
 import 'package:chat_desk/widgets/login_register_button.dart';
 import 'package:flutter/material.dart';
-import 'package:random_password_generator/random_password_generator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class KeyGenerateScreen extends StatefulWidget {
+FirebaseFirestore db = FirebaseFirestore.instance;
+
+class KeyGeneratedScreen extends StatefulWidget {
   static String route = '/key_generate_screen';
-  FirebaseFirestore db = FirebaseFirestore.instance;
-  final passwordGenerator = RandomPasswordGenerator();
-  late String newKey = "";
-  generateKey() {
-    newKey = passwordGenerator.randomPassword(
-        letters: true, numbers: true, uppercase: true, passwordLength: 12);
-  }
-
-  storeKey() {
-    db.collection("keys").doc(newKey).set({});
-  }
-
-  KeyGenerateScreen({Key? key}) : super(key: key);
+  KeyGeneratedScreen({Key? key}) : super(key: key);
 
   @override
-  State<KeyGenerateScreen> createState() => _KeyGenerateScreenState();
+  State<KeyGeneratedScreen> createState() => _KeyGeneratedScreenState();
 }
 
-class _KeyGenerateScreenState extends State<KeyGenerateScreen> {
+class _KeyGeneratedScreenState extends State<KeyGeneratedScreen> {
+  storeKey(String newKey) {
+    db.collection("keys").doc(newKey).set({});
+  }
   @override
   Widget build(BuildContext context) {
-    widget.generateKey();
+    final args = ModalRoute.of(context)!.settings.arguments as Map;
+    String newKey = args['newKey'];
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,10 +44,10 @@ class _KeyGenerateScreenState extends State<KeyGenerateScreen> {
                     ),
                     const SizedBox(height: 30),
                     Container(
-                      padding: EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5.0),
-                        color: Color.fromARGB(255, 26, 26, 26),
+                        color: const Color.fromARGB(255, 26, 26, 26),
                         boxShadow: const [
                           BoxShadow(
                             color: Colors.grey,
@@ -64,7 +57,7 @@ class _KeyGenerateScreenState extends State<KeyGenerateScreen> {
                         ],
                       ),
                       child: Text(
-                        widget.newKey,
+                        newKey,
                         style: const TextStyle(
                           fontSize: 40,
                         ),
@@ -108,8 +101,8 @@ class _KeyGenerateScreenState extends State<KeyGenerateScreen> {
                       buttonText: 'Done',
                       buttonColor: Colors.purple,
                       onClick: () {
-                        print("stored");
-                        widget.storeKey();
+                        storeKey(newKey);
+                        Navigator.pushNamed(context, StartScreen.route);
                       },
                     ),
                     Padding(

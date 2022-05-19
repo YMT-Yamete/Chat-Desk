@@ -1,4 +1,5 @@
-import 'package:chat_desk/screens/key_generate_screen.dart';
+import 'package:chat_desk/screens/generating_key.dart';
+import 'package:chat_desk/screens/key_generated_screen.dart';
 import 'package:chat_desk/screens/login_screen.dart';
 import 'package:chat_desk/screens/main_screen.dart';
 import 'package:chat_desk/screens/important_note.dart';
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
         StartScreen.route: (context) => StartScreen(),
         LoginScreen.route: (context) => LoginScreen(),
         ImportantNote.route: (context) => ImportantNote(),
-        KeyGenerateScreen.route: (context) => KeyGenerateScreen(),
+        GeneratingKey.route: (context) => GeneratingKey(),
+        KeyGeneratedScreen.route: (context) => KeyGeneratedScreen(),
         MainScreen.route: (context) => MainScreen(),
       },
     );

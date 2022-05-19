@@ -1,4 +1,4 @@
-import 'package:chat_desk/screens/key_generate_screen.dart';
+import 'package:chat_desk/screens/generating_key.dart';
 import 'package:flutter/material.dart';
 import '../widgets/login_register_button.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -65,7 +65,7 @@ class _ImportantNoteState extends State<ImportantNote> {
                     ),
                     SizedBox(height: 20),
                     Text(
-                      '1. In the next page, you will be given a new secret key.',
+                      '1. In the next page, new secret key will be generated for you.',
                       style: TextStyle(
                         fontSize: 18,
                         letterSpacing: 1,
@@ -73,7 +73,7 @@ class _ImportantNoteState extends State<ImportantNote> {
                     ),
                     SizedBox(height: 15),
                     Text(
-                      '2. You can unlock your book by entering that key.',
+                      '2. You can unlock your book by using that key.',
                       style: TextStyle(
                         fontSize: 18,
                         letterSpacing: 1,
@@ -125,7 +125,7 @@ class _ImportantNoteState extends State<ImportantNote> {
                     buttonColor: Colors.purple,
                     onClick: () {
                       if (checkedValue) {
-                        Navigator.pushNamed(context, KeyGenerateScreen.route);
+                        Navigator.pushNamed(context, GeneratingKey.route);
                       } else {
                         _onAlertButtonPressed(context);
                       }
