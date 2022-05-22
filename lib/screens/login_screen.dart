@@ -2,6 +2,7 @@ import 'package:chat_desk/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import '../widgets/login_register_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 FirebaseFirestore db = FirebaseFirestore.instance;
 
@@ -16,8 +17,10 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   late String bookKey;
   void login(String key) {
-    db.collection('keys').doc(key).get().then((value) {
+    db.collection('keys').doc(key).get().then((value) async {
       if (value.exists) {
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('isLoggedIn', true);
         Navigator.pushReplacementNamed(context, MainScreen.route);
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
