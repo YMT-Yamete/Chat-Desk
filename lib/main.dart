@@ -1,3 +1,4 @@
+import 'package:chat_desk/screens/add_image_screen.dart';
 import 'package:chat_desk/screens/generating_key.dart';
 import 'package:chat_desk/screens/key_generated_screen.dart';
 import 'package:chat_desk/screens/login_screen.dart';
@@ -19,7 +20,6 @@ void main() async {
   final prefs = await SharedPreferences.getInstance().then((value) {
     isLoggedIn = value.getBool('isLoggedIn');
   });
-  print(isLoggedIn);
 
   //run app
   runApp(MyApp());
@@ -48,6 +48,7 @@ class _MyAppState extends State<MyApp> {
         GeneratingKey.route: (context) => GeneratingKey(),
         KeyGeneratedScreen.route: (context) => KeyGeneratedScreen(),
         MainScreen.route: (context) => MainScreen(),
+        AddImageScreen.route: (context) => AddImageScreen(),
       },
     );
   }
