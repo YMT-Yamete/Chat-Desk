@@ -10,18 +10,18 @@ class AnimatedTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedTextKit(
       animatedTexts: [
-        TypewriterAnimatedText(
+        TyperAnimatedText(
           'Photo Scrapbook',
           textStyle: const TextStyle(
             fontSize: 38.0,
             fontWeight: FontWeight.bold,
             fontFamily: 'SourceSansPro',
           ),
-          speed: const Duration(milliseconds: 500),
+          speed: const Duration(milliseconds: 100),
         ),
       ],
       totalRepeatCount: 4,
-      pause: const Duration(milliseconds: 500),
+      pause: const Duration(milliseconds: 5000),
       displayFullTextOnTap: true,
       stopPauseOnTap: true,
     );

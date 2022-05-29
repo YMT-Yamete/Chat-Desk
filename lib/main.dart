@@ -9,7 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-bool? isLoggedIn;
+String? currentUserKey;
+bool? isLoggedIn = false;
+
 @override
 void main() async {
   //initialized firebase
@@ -18,7 +20,9 @@ void main() async {
 
   //check if user is logged in or not
   final prefs = await SharedPreferences.getInstance().then((value) {
-    isLoggedIn = value.getBool('isLoggedIn');
+    if (value.getString('key') != null) {
+      isLoggedIn = true;
+    }
   });
 
   //run app

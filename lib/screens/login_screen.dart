@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../widgets/login_register_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 FirebaseFirestore db = FirebaseFirestore.instance;
 
@@ -19,16 +20,32 @@ class _LoginScreenState extends State<LoginScreen> {
   void login(String key) {
     db.collection('keys').doc(key).get().then((value) async {
       if (value.exists) {
+        //auth with shared pref local storage
         final prefs = await SharedPreferences.getInstance();
-        await prefs.setBool('isLoggedIn', true);
+        await prefs.setString('key', key);
+
+        //auth with firebase anonymous auth
+        try {
+          final userCredential =
+              await FirebaseAuth.instance.signInAnonymously();
+        } on FirebaseAuthException catch (e) {
+          switch (e.code) {
+            case "operation-not-allowed":
+              print("Anonymous auth hasn't been enabled for this project.");
+              break;
+            default:
+              print("Unknown error.");
+          }
+        }
+
+        //login successful
         Navigator.pushReplacementNamed(context, MainScreen.route);
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text("Unlock Successful"),
           ),
         );
-      }
-      else {
+      } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text("Incorrect Key."),
