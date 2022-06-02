@@ -5,6 +5,7 @@ import 'package:chat_desk/screens/login_screen.dart';
 import 'package:chat_desk/screens/main_screen.dart';
 import 'package:chat_desk/screens/important_note.dart';
 import 'package:chat_desk/screens/start_screen.dart';
+import 'package:chat_desk/screens/view_image_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -53,6 +54,7 @@ class _MyAppState extends State<MyApp> {
         KeyGeneratedScreen.route: (context) => KeyGeneratedScreen(),
         MainScreen.route: (context) => MainScreen(),
         AddImageScreen.route: (context) => AddImageScreen(),
+        ViewImage.route: (context) => ViewImage(),
       },
     );
   }

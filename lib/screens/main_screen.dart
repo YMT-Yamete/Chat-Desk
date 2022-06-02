@@ -1,4 +1,5 @@
 import 'package:chat_desk/screens/add_image_screen.dart';
+import 'package:chat_desk/screens/view_image_screen.dart';
 import 'package:firedart/firedart.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -110,10 +111,26 @@ class _MainScreenState extends State<MainScreen> {
                           decoration: const BoxDecoration(
                             color: Colors.black,
                           ),
-                          child: Image(
-                            image: NetworkImage(
-                                currentUserData!['imgUrls'][index]),
-                            fit: BoxFit.cover,
+                          child: GestureDetector(
+                            onTap: () {
+                              print('tapped');
+                            },
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(context, ViewImage.route, arguments: {
+                                  'imgUrls': currentUserData!['imgUrls'],
+                                  'index': index,
+                                });
+                              },
+                              child: Hero(
+                                tag: currentUserData!['imgUrls'][index].toString(),
+                                child: Image(
+                                  image: NetworkImage(
+                                      currentUserData['imgUrls'][index]),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
                           ),
                         );
                       },
