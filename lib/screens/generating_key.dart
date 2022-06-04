@@ -10,7 +10,7 @@ FirebaseFirestore db = FirebaseFirestore.instance;
 
 class GeneratingKey extends StatefulWidget {
   static String route = '/generating_key';
-  GeneratingKey({Key? key}) : super(key: key);
+  const GeneratingKey({Key? key}) : super(key: key);
 
   @override
   State<GeneratingKey> createState() => _GeneratingKeyState();
@@ -40,13 +40,13 @@ class _GeneratingKeyState extends State<GeneratingKey> {
         }
       });
     } catch (e) {
+      // ignore: avoid_print
       print(e);
     }
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     setState(() {
       generateKey();

@@ -9,7 +9,7 @@ FirebaseFirestore db = FirebaseFirestore.instance;
 
 class LoginScreen extends StatefulWidget {
   static String route = '/login';
-  LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -26,14 +26,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
         //auth with firebase anonymous auth
         try {
-          final userCredential =
-              await FirebaseAuth.instance.signInAnonymously();
+          await FirebaseAuth.instance.signInAnonymously();
         } on FirebaseAuthException catch (e) {
           switch (e.code) {
             case "operation-not-allowed":
+              // ignore: avoid_print
               print("Anonymous auth hasn't been enabled for this project.");
               break;
             default:
+              // ignore: avoid_print
               print("Unknown error.");
           }
         }

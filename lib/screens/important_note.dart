@@ -5,7 +5,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 
 class ImportantNote extends StatefulWidget {
   static String route = "/important_note";
-  ImportantNote({Key? key}) : super(key: key);
+  const ImportantNote({Key? key}) : super(key: key);
 
   @override
   State<ImportantNote> createState() => _ImportantNoteState();

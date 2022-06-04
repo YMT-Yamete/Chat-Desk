@@ -7,7 +7,7 @@ import '../widgets/login_register_button.dart';
 
 class StartScreen extends StatelessWidget {
   static String route = "/";
-  StartScreen({Key? key}) : super(key: key);
+  const StartScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

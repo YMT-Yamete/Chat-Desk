@@ -5,14 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 final storage = FirebaseStorage.instance;
 FirebaseAuth auth = FirebaseAuth.instance;
 
 class MainScreen extends StatefulWidget {
   static String route = '/main_screen';
-  MainScreen({Key? key}) : super(key: key);
+  const MainScreen({Key? key}) : super(key: key);
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -21,10 +20,11 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   String? currentUserKey;
   getCurrentUserKey() async {
-    final prefs = await SharedPreferences.getInstance().then((value) {
+    await SharedPreferences.getInstance().then((value) {
       setState(() {
         currentUserKey = value.getString('key');
       });
+      // ignore: avoid_print
       print(currentUserKey);
     });
   }
@@ -41,7 +41,6 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getCurrentUserKey();
   }
@@ -113,17 +112,20 @@ class _MainScreenState extends State<MainScreen> {
                           ),
                           child: GestureDetector(
                             onTap: () {
+                              // ignore: avoid_print
                               print('tapped');
                             },
                             child: InkWell(
                               onTap: () {
-                                Navigator.pushNamed(context, ViewImage.route, arguments: {
-                                  'imgUrls': currentUserData!['imgUrls'],
-                                  'index': index,
-                                });
+                                Navigator.pushNamed(context, ViewImage.route,
+                                    arguments: {
+                                      'imgUrls': currentUserData!['imgUrls'],
+                                      'index': index,
+                                    });
                               },
                               child: Hero(
-                                tag: currentUserData!['imgUrls'][index].toString(),
+                                tag: currentUserData!['imgUrls'][index]
+                                    .toString(),
                                 child: Image(
                                   image: NetworkImage(
                                       currentUserData['imgUrls'][index]),

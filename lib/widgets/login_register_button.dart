@@ -32,7 +32,7 @@ class LoginRegisterButton extends StatelessWidget {
               padding: const EdgeInsets.all(15.0),
               child: Text(
                 buttonText,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                 ),
               ),

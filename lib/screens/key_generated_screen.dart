@@ -7,7 +7,7 @@ FirebaseFirestore db = FirebaseFirestore.instance;
 
 class KeyGeneratedScreen extends StatefulWidget {
   static String route = '/key_generate_screen';
-  KeyGeneratedScreen({Key? key}) : super(key: key);
+  const KeyGeneratedScreen({Key? key}) : super(key: key);
 
   @override
   State<KeyGeneratedScreen> createState() => _KeyGeneratedScreenState();

@@ -17,21 +17,21 @@ bool? isLoggedIn = false;
 void main() async {
   //initialized firebase
   WidgetsFlutterBinding.ensureInitialized();
-  FirebaseApp defaultApp = await Firebase.initializeApp();
+  await Firebase.initializeApp();
 
   //check if user is logged in or not
-  final prefs = await SharedPreferences.getInstance().then((value) {
+  await SharedPreferences.getInstance().then((value) {
     if (value.getString('key') != null) {
       isLoggedIn = true;
     }
   });
 
   //run app
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -47,14 +47,14 @@ class _MyAppState extends State<MyApp> {
       ),
       initialRoute: isLoggedIn == true ? MainScreen.route : StartScreen.route,
       routes: {
-        StartScreen.route: (context) => StartScreen(),
-        LoginScreen.route: (context) => LoginScreen(),
-        ImportantNote.route: (context) => ImportantNote(),
-        GeneratingKey.route: (context) => GeneratingKey(),
-        KeyGeneratedScreen.route: (context) => KeyGeneratedScreen(),
-        MainScreen.route: (context) => MainScreen(),
-        AddImageScreen.route: (context) => AddImageScreen(),
-        ViewImage.route: (context) => ViewImage(),
+        StartScreen.route: (context) => const StartScreen(),
+        LoginScreen.route: (context) => const LoginScreen(),
+        ImportantNote.route: (context) => const ImportantNote(),
+        GeneratingKey.route: (context) => const GeneratingKey(),
+        KeyGeneratedScreen.route: (context) => const KeyGeneratedScreen(),
+        MainScreen.route: (context) => const MainScreen(),
+        AddImageScreen.route: (context) => const AddImageScreen(),
+        ViewImage.route: (context) => const ViewImage(),
       },
     );
   }

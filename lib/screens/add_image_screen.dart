@@ -18,7 +18,7 @@ class AddImageScreen extends StatefulWidget {
 }
 
 class _AddImageScreenState extends State<AddImageScreen> {
-  List<File> _imageList = [];
+  final List<File> _imageList = [];
   String? currentUserKey;
   bool uploading = false;
   double val = 0;
@@ -41,7 +41,7 @@ class _AddImageScreenState extends State<AddImageScreen> {
         val = i / _imageList.length;
       });
       //get current user key
-      final prefs = await SharedPreferences.getInstance().then((value) {
+      await SharedPreferences.getInstance().then((value) {
         currentUserKey = value.getString('key');
       });
 
