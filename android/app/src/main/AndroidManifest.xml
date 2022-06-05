@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.photo_scrapbook">
    <application
-        android:label="photo_scrapbook"
+        android:label="Photo Scrapbook - The Sharable Gallery"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

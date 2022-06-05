@@ -69,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Hero(
                   tag: "logo",
                   child: Image.asset(
-                    "assets/images/chat_desk_logo.png",
+                    "assets/images/Icon 2.png",
                     width: 120,
                   ),
                 ),

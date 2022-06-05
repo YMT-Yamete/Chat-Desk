@@ -130,6 +130,7 @@ class _ViewImageState extends State<ViewImage> {
           scrollPhysics: const BouncingScrollPhysics(),
           onPageChanged: (value) {
             setState(() {
+              print(value);
               currentImgIndex = value;
             });
           },

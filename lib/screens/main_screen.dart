@@ -51,94 +51,96 @@ class _MainScreenState extends State<MainScreen> {
         .collection('keys')
         .doc(currentUserKey)
         .snapshots();
-    return SafeArea(
-      child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.pushNamed(context, AddImageScreen.route);
-          },
-          child: const Icon(
-            Icons.add,
-            color: Colors.white,
-          ),
-        ),
-        appBar: AppBar(
-          title: const Text('My Photos'),
-          centerTitle: true,
-          automaticallyImplyLeading: false,
-          actions: [
-            GestureDetector(
-              onTap: () {
-                _signOut().whenComplete(() => Navigator.pop(context));
-              },
-              child: const Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Icon(Icons.logout),
-              ),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: SafeArea(
+        child: Scaffold(
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Navigator.pushNamed(context, AddImageScreen.route);
+            },
+            child: const Icon(
+              Icons.add,
+              color: Colors.white,
             ),
-          ],
-        ),
-        body: StreamBuilder<DocumentSnapshot>(
-          stream: keysStream,
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            final currentUserData = snapshot.data;
-            int imgCount = 0;
-            try {
-              imgCount = currentUserData!['imgUrls'].length;
-            } catch (e) {
-              imgCount = 0;
-            }
-            return imgCount == 0
-                ? Container()
-                : Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisSpacing: 6,
-                        mainAxisSpacing: 6,
-                        crossAxisCount: 3,
-                      ),
-                      itemCount: imgCount,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          decoration: const BoxDecoration(
-                            color: Colors.black,
-                          ),
-                          child: GestureDetector(
-                            onTap: () {
-                              // ignore: avoid_print
-                              print('tapped');
-                            },
-                            child: InkWell(
+          ),
+          appBar: AppBar(
+            title: const Text('My Photos'),
+            centerTitle: true,
+            automaticallyImplyLeading: false,
+            actions: [
+              GestureDetector(
+                onTap: () {
+                  _signOut().whenComplete(() => Navigator.pop(context));
+                },
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Icon(Icons.logout),
+                ),
+              ),
+            ],
+          ),
+          body: StreamBuilder<DocumentSnapshot>(
+            stream: keysStream,
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              final currentUserData = snapshot.data;
+              List<dynamic> reversedList = currentUserData!['imgUrls'].reversed.toList();
+              int imgCount = 0;
+              try {
+                imgCount = reversedList.length;
+              } catch (e) {
+                imgCount = 0;
+              }
+              return imgCount == 0
+                  ? Container()
+                  : Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisSpacing: 6,
+                          mainAxisSpacing: 6,
+                          crossAxisCount: 3,
+                        ),
+                        itemCount: imgCount,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            decoration: const BoxDecoration(
+                              color: Colors.black,
+                            ),
+                            child: GestureDetector(
                               onTap: () {
-                                Navigator.pushNamed(context, ViewImage.route,
-                                    arguments: {
-                                      'imgUrls': currentUserData!['imgUrls'],
-                                      'index': index,
-                                    });
+                                // ignore: avoid_print
+                                print('tapped');
                               },
-                              child: Hero(
-                                tag: currentUserData!['imgUrls'][index]
-                                    .toString(),
-                                child: Image(
-                                  image: NetworkImage(
-                                      currentUserData['imgUrls'][index]),
-                                  fit: BoxFit.cover,
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.pushNamed(context, ViewImage.route,
+                                      arguments: {
+                                        'imgUrls': reversedList,
+                                        'index': index,
+                                      });
+                                },
+                                child: Hero(
+                                  tag: reversedList[index].toString(),
+                                  child: Image(
+                                    image: NetworkImage(reversedList[index]),
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        );
-                      },
-                    ),
-                  );
-          },
+                          );
+                        },
+                      ),
+                    );
+            },
+          ),
         ),
       ),
     );

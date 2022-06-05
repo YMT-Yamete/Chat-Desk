@@ -121,16 +121,36 @@ class _AddImageScreenState extends State<AddImageScreen> {
                           ),
                         ),
                       )
-                    : Container(
-                        decoration: const BoxDecoration(
-                          color: Colors.black,
-                        ),
-                        child: Image(
-                          image: FileImage(
-                            _imageList[index - 1],
+                    : Stack(
+                        children: <Widget>[
+                          Container(
+                            decoration:
+                                const BoxDecoration(color: Colors.black),
+                            alignment: Alignment.center,
+                            height: 240,
+                            child: Image.file(_imageList[index - 1],
+                                fit: BoxFit.fill),
                           ),
-                          fit: BoxFit.cover,
-                        ),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _imageList.removeAt(index - 1);
+                                });
+                              },
+                              child: const CircleAvatar(
+                                child: Icon(
+                                  Icons.delete,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                                backgroundColor: Colors.red,
+                                radius: 15,
+                              ),
+                            ),
+                          )
+                        ],
                       );
               },
             ),
@@ -147,8 +167,8 @@ class _AddImageScreenState extends State<AddImageScreen> {
                         ),
                         CircularProgressIndicator(
                           value: val,
-                          valueColor:
-                              const AlwaysStoppedAnimation<Color>(Colors.purple),
+                          valueColor: const AlwaysStoppedAnimation<Color>(
+                              Colors.purple),
                         )
                       ],
                     ),

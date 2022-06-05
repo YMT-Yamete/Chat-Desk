@@ -8,22 +8,25 @@ class AnimatedTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedTextKit(
-      animatedTexts: [
-        TyperAnimatedText(
-          'Photo Scrapbook',
-          textStyle: const TextStyle(
-            fontSize: 38.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'SourceSansPro',
+    return Padding(
+      padding: const EdgeInsets.only(top: 14),
+      child: AnimatedTextKit(
+        animatedTexts: [
+          TyperAnimatedText(
+            'Photo Scrapbook',
+            textStyle: const TextStyle(
+              fontSize: 35.0,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'SourceSansPro',
+            ),
+            speed: const Duration(milliseconds: 100),
           ),
-          speed: const Duration(milliseconds: 100),
-        ),
-      ],
-      totalRepeatCount: 4,
-      pause: const Duration(milliseconds: 5000),
-      displayFullTextOnTap: true,
-      stopPauseOnTap: true,
+        ],
+        totalRepeatCount: 4,
+        pause: const Duration(milliseconds: 5000),
+        displayFullTextOnTap: true,
+        stopPauseOnTap: true,
+      ),
     );
   }
 }

@@ -41,7 +41,7 @@ class StartScreen extends StatelessWidget {
                         Hero(
                           tag: "logo",
                           child: Image.asset(
-                            "assets/images/chat_desk_logo.png",
+                            "assets/images/Icon.png",
                             width: 80,
                           ),
                         ),
