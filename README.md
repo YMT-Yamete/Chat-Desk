@@ -2,8 +2,12 @@
 
 ## How to use
 
-- Create a new book by generating new key.
-- Store your photos.
-- Keep it on your own or share the key with your friends.
+- Create a new book by generating a new key.
+
+- Unlock your book using your key.
+
+- Store your photos
+
+- Keep the key on your own or share it with your friends
 
 Thats it!!
